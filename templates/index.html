@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NumGuess | Number Guessing Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="animated-background">
+      <div class="stars"></div>
+      <div class="floating-numbers" id="floatingContainer"></div>
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">NumGuess</p>
+        <h1>Number Guessing Game</h1>
+        <p class="subtitle">
+          Guess the hidden number. Try to solve it in as few attempts as possible.
+        </p>
+      </header>
+
+      <div class="score-panel">
+        <div class="score-box">
+          <span class="label">Session Games</span>
+          <strong id="sessionGames">0</strong>
+        </div>
+        <div class="score-box">
+          <span class="label">Best This Session</span>
+          <strong id="bestSession">∞</strong>
+        </div>
+      </div>
+
+      <main class="game-card">
+        <div class="difficulty-selector">
+          <p class="difficulty-label">Select Difficulty:</p>
+          <div class="difficulty-buttons">
+            <button class="difficulty-btn active" data-difficulty="easy" data-range="50">
+              Easy (1-50)
+            </button>
+            <button class="difficulty-btn" data-difficulty="medium" data-range="100">
+              Medium (1-100)
+            </button>
+            <button class="difficulty-btn" data-difficulty="hard" data-range="200">
+              Hard (1-200)
+            </button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat-box">
+            <span class="label">Attempts</span>
+            <strong id="attempts">0</strong>
+          </div>
+          <div class="stat-box">
+            <span class="label">Range</span>
+            <strong id="range">1–50</strong>
+          </div>
+        </div>
+
+        <div class="message-box" id="messageBox" aria-live="polite">
+          Select a difficulty and click "New Game" to start!
+        </div>
+
+        <form id="guessForm" class="guess-form">
+          <label for="guessInput">Your guess</label>
+          <div class="input-row">
+            <input
+              id="guessInput"
+              type="number"
+              placeholder="Enter a number"
+              required
+              disabled
+            />
+            <button type="submit" disabled>Guess</button>
+          </div>
+        </form>
+
+        <div class="actions">
+          <button id="newGameBtn" class="secondary" type="button">New Game</button>
+          <button id="sessionLogBtn" class="secondary" type="button">Session Log</button>
+          <button id="leaderboardBtn" class="secondary" type="button">Leaderboard</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- Session Log Modal -->
+    <div id="sessionLogModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Session Score Log</h2>
+          <button class="close-btn" id="closeSessionLog">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="sessionLogList" class="scoreboard-list">
+            <p class="empty-message">No games played in this session yet!</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="closeSessionLogBtn" class="secondary">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>🏆 All-Time Leaderboard</h2>
+          <button class="close-btn" id="closeLeaderboard">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="leaderboardList" class="leaderboard-list">
+            <p class="empty-message">No records yet. Start playing to earn a spot!</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="clearLeaderboardBtn" class="danger-btn">Clear Leaderboard</button>
+          <button id="closeLeaderboardBtn" class="secondary">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
